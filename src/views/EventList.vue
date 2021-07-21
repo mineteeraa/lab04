@@ -5,7 +5,7 @@
     <div class="pagination">
       <router-link
         id="page-prev"
-        :to="{ name: 'EventList', query: { page: page - 1 } }"
+        :to="{ name: 'EventList', query: { page: page - 1, perPage } }"
         rel="prev"
         v-if="page != 1"
       >
@@ -13,7 +13,7 @@
       </router-link>
       <router-link
         id="page-next"
-        :to="{ name: 'EventList', query: { page: page + 1 } }"
+        :to="{ name: 'EventList', query: { page: page + 1, perPage } }"
         rel="next"
         v-if="hasNextPage"
       >
@@ -23,15 +23,17 @@
     <br />
     <router-link
       id="total-increase"
-      :to="{ name: 'EventList', query: { perPage: perPage + 1 } }"
-      rel="increase"
+      :to="{ name: 'EventList', query: { page, perPage: perPage + 1 } }"
+      rel="total-increase"
+      v-if="perPage < totalEvents"
     >
       Increase Total
     </router-link>
     <router-link
       id="total-decrease"
-      :to="{ name: 'EventList', query: { perPage: perPage - 1 } }"
-      rel="decrease"
+      :to="{ name: 'EventList', query: { page, perPage: perPage - 1 } }"
+      rel="total-decrease"
+      v-if="perPage != 1"
     >
       Decrease Total
     </router-link>
